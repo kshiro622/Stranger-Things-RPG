@@ -1,0 +1,101 @@
+* {
+  box-sizing: border-box;
+  text-align: center;
+  margin: 0px;
+}
+
+body{
+	background-image:url(../images/background2.jpeg);
+	background-size: 100%;
+}
+
+.header {
+	margin-bottom: 15px;
+}
+
+h1 {
+	color: #ee2e24;
+	font-size: 40px;
+	text-align: left;
+	font-family: 'Skranji', cursive;
+}
+
+.logo {
+	height: 100px;
+	padding-left: 100px;
+}
+
+.game {
+	text-align: left;
+	margin-left: 15px;
+	color: white;
+	font-family: 'Skranji', cursive;
+	font-size: 20px;
+	padding-bottom: 120px;
+	z-index: 0;
+}
+
+.fight {
+	text-align: left;
+	margin-left: 15px;
+	color: white;
+	font-family: 'Skranji', cursive;
+	font-size: 20px;
+	padding-bottom: 5px;
+}
+
+.button {
+	text-align: left;
+	margin-left: 15px;
+	color: #ee2e24;
+	font-family: 'Skranji', cursive;
+	font-size: 15px;
+	padding-bottom: 10px;
+}
+
+.character {
+	font-size: 13px;
+	width: 120px;
+	height: 110px;
+	background-color: white;
+	border: 2px solid #ee2e24;
+}
+
+.character-image {
+	height: 72px;
+}
+
+#leonidas {
+	position: absolute;
+	top: 5px;
+	left: 10px;
+}
+
+#dilios {
+	position: absolute;
+	top: 5px;
+	left: 140px;
+}
+
+#xerxes {
+	position: absolute;
+	top: 5px;
+	left: 270px;
+}
+
+#artemisia {
+	position: absolute;
+	top: 5px;
+	left: 400px;
+}
+
+.enemy {
+	background-color: #ee2e24;
+	border: 2px solid white;
+}
+
+.defender {
+	background-color: black;
+	border: 2px solid #ee2e24;
+	color: white;
+}
