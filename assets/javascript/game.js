@@ -1,83 +1,99 @@
 $(document).ready(function(){
 
+	var eleven = {
+		health: 120,
+		attack: 8,
+	};
+
+	var chiefHopper = {
+		health: 100,
+		attack: 5,
+	};
+
+	var monster = {
+		health: 180,
+		attack: 25,
+	};
+
+	var drBrenner = {
+		health: 150,
+		attack: 16,
+	};
+
 // global variables
-	var leonidasScore = 120;
-	var diliosScore = 100;
-	var xerxesScore = 180;
-	var artemisiaScore = 150;
 	var characterIsChosen = false;
-	var characterIsLeonidas = false;
-	var characterIsDilios = false;
-	var characterIsXerxes = false;
-	var characterIsArtemisia = false;
-	// var defenderIsLeonidas = false;
-	// var defenderIsDilios = false;
-	// var defenderIsXerxes = false;
-	// var defenderIsArtemisia = false;
+	var characterIsEleven = false;
+	var characterIsChiefHopper = false;
+	var characterIsMonster = false;
+	var characterIsDrBrenner = false;
+	// var defenderIsEleven = false;
+	// var defenderIsChiefHopper = false;
+	// var defenderIsMonster = false;
+	// var defenderIsDrBrenner = false;
 
 //display health score of each player
-	$('.leonidas-health').html(leonidasScore);
-	$('.dilios-health').html(diliosScore);
-	$('.xerxes-health').html(xerxesScore);
-	$('.artemisia-health').html(artemisiaScore);
+	$('.eleven-health').html(eleven.health);
+	$('.chief-hopper-health').html(chiefHopper.health);
+	$('.monster-health').html(monster.health);
+	$('.dr-brenner-health').html(drBrenner.health);
 
 // choose character, move others to enemies
 	if (characterIsChosen === false) {
-		$('#leonidas').on('click', function() {
+		$('#eleven').on('click', function() {
 			$(this).animate({top:'+=137px'});
-			$('#dilios').animate({top:'+=285', left:'-=130px', color:'#ee2e24'});
-			$('#xerxes').animate({top:'+=285', left:'-=130px'});
-			$('#artemisia').animate({top:'+=285', left:'-=130px'});
-			$('#dilios').addClass('enemy');
-			$('#xerxes').addClass('enemy');
-			$('#artemisia').addClass('enemy');
+			$('#chief-hopper').animate({top:'+=285', left:'-=130px', color:'#ee2e24'});
+			$('#monster').animate({top:'+=285', left:'-=130px'});
+			$('#dr-brenner').animate({top:'+=285', left:'-=130px'});
+			$('#chief-hopper').addClass('enemy');
+			$('#monster').addClass('enemy');
+			$('#dr-brenner').addClass('enemy');
 			characterIsChosen = true;
-			characterIsLeonidas = true;
+			characterIsEleven = true;
 			console.log(characterIsChosen);
 		});
 
-		$('#dilios').on('click', function() {
+		$('#chief-hopper').on('click', function() {
 			$(this).animate({top:'+=137px', left:'-=130px'});
-			$('#leonidas').animate({top:'+=285'});
-			$('#xerxes').animate({top:'+=285', left:'-=130px'});
-			$('#artemisia').animate({top:'+=285', left:'-=130px'});
-			$('#leonidas').addClass('enemy');
-			$('#xerxes').addClass('enemy');
-			$('#artemisia').addClass('enemy');
+			$('#eleven').animate({top:'+=285'});
+			$('#monster').animate({top:'+=285', left:'-=130px'});
+			$('#dr-brenner').animate({top:'+=285', left:'-=130px'});
+			$('#eleven').addClass('enemy');
+			$('#monster').addClass('enemy');
+			$('#dr-brenner').addClass('enemy');
 			characterIsChosen = true;
-			characterIsDilios = true;
+			characterIsChiefHopper = true;
 			console.log(characterIsChosen);
 		});
 
-		$('#xerxes').on('click', function() {
+		$('#monster').on('click', function() {
 			$(this).animate({top:'+=137px', left:'-=260px'});
-			$('#leonidas').animate({top:'+=285'});
-			$('#dilios').animate({top:'+=285'});
-			$('#artemisia').animate({top:'+=285', left:'-=130px'});
-			$('#leonidas').addClass('enemy');
-			$('#dilios').addClass('enemy');
-			$('#artemisia').addClass('enemy');
+			$('#eleven').animate({top:'+=285'});
+			$('#chief-hopper').animate({top:'+=285'});
+			$('#dr-brenner').animate({top:'+=285', left:'-=130px'});
+			$('#eleven').addClass('enemy');
+			$('#chief-hopper').addClass('enemy');
+			$('#dr-brenner').addClass('enemy');
 			characterIsChosen = true;
-			characterIsXerxes = true;
+			characterIsmonster = true;
 			console.log(characterIsChosen);
 		});
 
-		$('#artemisia').on('click', function() {
+		$('#dr-brenner').on('click', function() {
 			$(this).animate({top:'+=137px', left:'-=390px'});
-			$('#leonidas').animate({top:'+=285'});
-			$('#dilios').animate({top:'+=285'});
-			$('#xerxes').animate({top:'+=285'});
-			$('#leonidas').addClass('enemy');
-			$('#dilios').addClass('enemy');
-			$('#xerxes').addClass('enemy');
+			$('#eleven').animate({top:'+=285'});
+			$('#chief-hopper').animate({top:'+=285'});
+			$('#monster').animate({top:'+=285'});
+			$('#eleven').addClass('enemy');
+			$('#chief-hopper').addClass('enemy');
+			$('#monster').addClass('enemy');
 			characterIsChosen = true;
-			characterIsArtemisia = true;
+			characterIsDrBrenner = true;
 			console.log(characterIsChosen);
 		});
 
 // move character to defender position 
 	} else if (characterIsChosen === true) {
-		// $('#leonidas').one('click', function() {
+		// $('#eleven').one('click', function() {
 		// 	$(this).animate({top:'+=137px'});
 		// 	$(this).addClass('defender');
 		// });
@@ -85,21 +101,21 @@ $(document).ready(function(){
 
 // attack button --> 
 	$('#attack').on('click', function() {
-		if (characterIsLeonidas === true){}
-		if (characterIsDilios === true){}
-		if (characterIsXerxes === true){}
-		if (characterIsArtemisia === true){}
+		if (characterIsEleven === true){}
+		if (characterIsChiefHopper === true){}
+		if (characterIsMonster === true){}
+		if (characterIsDrBrenner === true){}
 	});
 
 // restart button
 	$('#restart').on('click', function() {
-		$('#leonidas').animate({top: '5px'});
-		$('#dilios').animate({top:'5px', left:'140px'});
-		$('#xerxes').animate({top:'5px', left:'270px'});
-		$('#artemisia').animate({top:'5px', left:'400px'});
-		$('#leonidas').removeClass('enemy', 'defender');
-		$('#dilios').removeClass('enemy', 'defender');
-		$('#xerxes').removeClass('enemy', 'defender');
-		$('#artemisia').removeClass('enemy', 'defender');
+		$('#eleven').animate({top: '5px'});
+		$('#chief-hopper').animate({top:'5px', left:'140px'});
+		$('#monster').animate({top:'5px', left:'270px'});
+		$('#dr-brenner').animate({top:'5px', left:'400px'});
+		$('#eleven').removeClass('enemy', 'defender');
+		$('#chief-hopper').removeClass('enemy', 'defender');
+		$('#monster').removeClass('enemy', 'defender');
+		$('#dr-brenner').removeClass('enemy', 'defender');
 	});
 });
