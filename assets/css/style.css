@@ -9,29 +9,32 @@ body{
 	background-size: 100%;
 }
 
-.header {
+.header {2
 	margin-bottom: 15px;
 }
 
 h1 {
 	color: #ee2e24;
-	font-size: 40px;
-	text-align: left;
-	font-family: 'Skranji', cursive;
+	font-size: 50px;
+	text-align: right;
+	font-family: 'Schoolbell', cursive;
+	margin-top: 30px;
+	margin-right: 10px;
 }
 
 .logo {
-	height: 100px;
-	padding-left: 100px;
+	height: 110px;
+	padding-top: 5px;
+	padding-left: 40px;
 }
 
 .game {
 	text-align: left;
 	margin-left: 15px;
 	color: white;
-	font-family: 'Skranji', cursive;
-	font-size: 20px;
-	padding-bottom: 120px;
+	font-family: 'VT323', monospace;
+	font-size: 25px;
+	padding-bottom: 110px;
 	z-index: 0;
 }
 
@@ -39,8 +42,8 @@ h1 {
 	text-align: left;
 	margin-left: 15px;
 	color: white;
-	font-family: 'Skranji', cursive;
-	font-size: 20px;
+	font-family: 'VT323', monospace;
+	font-size: 25px;
 	padding-bottom: 5px;
 }
 
@@ -48,7 +51,7 @@ h1 {
 	text-align: left;
 	margin-left: 15px;
 	color: #ee2e24;
-	font-family: 'Skranji', cursive;
+	font-family: 'VT323', monospace;
 	font-size: 15px;
 	padding-bottom: 10px;
 }
@@ -65,25 +68,25 @@ h1 {
 	height: 72px;
 }
 
-#leonidas {
+#eleven {
 	position: absolute;
 	top: 5px;
 	left: 10px;
 }
 
-#dilios {
+#chief-hopper {
 	position: absolute;
 	top: 5px;
 	left: 140px;
 }
 
-#xerxes {
+#monster {
 	position: absolute;
 	top: 5px;
 	left: 270px;
 }
 
-#artemisia {
+#dr-brenner {
 	position: absolute;
 	top: 5px;
 	left: 400px;
