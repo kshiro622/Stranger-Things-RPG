@@ -64,6 +64,7 @@ h1 {
 	border: 2px solid #ee2e24;
 	margin: 5px;
 	position: absolute;
+	z-index: 4;
 }
 
 .character-image {
@@ -91,12 +92,12 @@ h1 {
 }
 
 .enemy {
-	background-color: #ee2e24;
-	border: 2px solid white;
+	background-color: gray;
+	border: 2px solid #ee2e24;
 }
 
 .defender {
-	background-color: black;
-	border: 2px solid #ee2e24;
+	background-color: #ee2e24;
+	border: 2px solid white;
 	color: white;
 }

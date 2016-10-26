@@ -48,10 +48,11 @@ $(document).ready(function(){
 	];
 
 	var charWidth = 120;
-	var yourCharPos = {
-		top: '137px',
-		left: '25px'
-	};
+	var yourCharPos = 
+		{
+			top: '137px',
+			left: '25px'
+		};
 	var enemyPosArray = [
 		{
 			top: '285px',
@@ -72,6 +73,11 @@ $(document).ready(function(){
 	var characterIsChosen = false;
 	var defenderIsChosen = false;
 	var enemyIndex = 0;
+	var defPos = 
+		{
+			top: '500px',
+			left: '25px'
+		};
 
 //function to render DOM with character divs
 	function initialize() {
@@ -87,14 +93,12 @@ $(document).ready(function(){
 //function to select character
 
 	$('.character').on('click', function(){
-		if (characterIsChosen === false) {
+		if ((characterIsChosen === false) && (defenderIsChosen === false)) {
 			characterIsChosen = true;
 			$(this).animate(yourCharPos);
 			for (var j = 0; j<characters.length; j++){
 			    if (this.id === characters[j].id) {
 			        characters[j].isCharacter = true;
-			        console.log(characters[j].isCharacter);
-			        console.log(characters[j].id);
 			    } else {
 			    	var enemyId = '#' + characters[j].id;
 			    	$(enemyId).animate(enemyPosArray[enemyIndex]);
@@ -102,7 +106,11 @@ $(document).ready(function(){
 			    	enemyIndex++;
 			    };
 			};
-		};
+		} else if ((characterIsChosen === true) && (defenderIsChosen === false)){
+			$(this).addClass('defender');
+			$('.defender').animate(defPos);
+			defenderIsChosen = true;
+		}
 	});
 });
 
@@ -121,71 +129,6 @@ $(document).ready(function(){
 	// }
 // };
 
-// choose character, move others to enemies
-// 	if (characterIsChosen === false) {
-// 		$('#eleven').on('click', function() {
-// 			$(this).animate({top:'+=137px'});
-// 			$('#chief-hopper').animate({top:'+=285', left:'-=130px', color:'#ee2e24'});
-// 			$('#monster').animate({top:'+=285', left:'-=130px'});
-// 			$('#dr-brenner').animate({top:'+=285', left:'-=130px'});
-// 			$('#chief-hopper').addClass('enemy');
-// 			$('#monster').addClass('enemy');
-// 			$('#dr-brenner').addClass('enemy');
-// 			characterIsChosen = true;
-// 			eleven.isCharacter = true;
-// 			console.log(characterIsChosen);
-// 		});
-
-// 		$('#chief-hopper').on('click', function() {
-// 			$(this).animate({top:'+=137px', left:'-=130px'});
-// 			$('#eleven').animate({top:'+=285'});
-// 			$('#monster').animate({top:'+=285', left:'-=130px'});
-// 			$('#dr-brenner').animate({top:'+=285', left:'-=130px'});
-// 			$('#eleven').addClass('enemy');
-// 			$('#monster').addClass('enemy');
-// 			$('#dr-brenner').addClass('enemy');
-// 			characterIsChosen = true;
-// 			chiefHopper.isCharacter = true;
-// 			console.log(characterIsChosen);
-// 		});
-
-// 		$('#monster').on('click', function() {
-// 			$(this).animate({top:'+=137px', left:'-=260px'});
-// 			$('#eleven').animate({top:'+=285'});
-// 			$('#chief-hopper').animate({top:'+=285'});
-// 			$('#dr-brenner').animate({top:'+=285', left:'-=130px'});
-// 			$('#eleven').addClass('enemy');
-// 			$('#chief-hopper').addClass('enemy');
-// 			$('#dr-brenner').addClass('enemy');
-// 			characterIsChosen = true;
-// 			monster.isCharacter = true;
-// 			console.log(characterIsChosen);
-// 		});
-
-// 		$('#dr-brenner').on('click', function() {
-// 			$(this).animate({top:'+=137px', left:'-=390px'});
-// 			$('#eleven').animate({top:'+=285'});
-// 			$('#chief-hopper').animate({top:'+=285'});
-// 			$('#monster').animate({top:'+=285'});
-// 			$('#eleven').addClass('enemy');
-// 			$('#chief-hopper').addClass('enemy');
-// 			$('#monster').addClass('enemy');
-// 			characterIsChosen = true;
-// 			drBrenner.isCharacter = true;
-// 			return characterIsChosen;
-// 		});
-
-// // move character to defender position 
-// 	} else if ((characterIsChosen === true) && (defenderIsChosen === false)) {
-// 		$('#eleven').on('click', function() {
-// 			$(this).animate({top:'+=137px'});
-// 			$(this).addClass('defender');
-// 			eleven.isDefender = true;
-// 			defenderIsChosen = true;
-// 		});
-
-// 		//...
-// 	};
 
 // // attack button --> 
 // 	$('#attack').on('click', function(character, defender) {
