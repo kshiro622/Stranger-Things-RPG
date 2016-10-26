@@ -9,9 +9,9 @@ body{
 	background-size: 100%;
 }
 
-.header {2
-	margin-bottom: 15px;
-}
+/*.header {
+	margin-bottom: 5px;
+}*/
 
 h1 {
 	color: #ee2e24;
@@ -62,6 +62,8 @@ h1 {
 	height: 110px;
 	background-color: white;
 	border: 2px solid #ee2e24;
+	margin: 5px;
+	position: absolute;
 }
 
 .character-image {
@@ -69,27 +71,23 @@ h1 {
 }
 
 #eleven {
-	position: absolute;
-	top: 5px;
-	left: 10px;
+	top: 0px;
+	left: 20px;
 }
 
 #chief-hopper {
-	position: absolute;
-	top: 5px;
-	left: 140px;
+	top: 0px;
+	left: 150px;
 }
 
 #monster {
-	position: absolute;
-	top: 5px;
-	left: 270px;
+	top: 0px;
+	left: 280px;
 }
 
 #dr-brenner {
-	position: absolute;
-	top: 5px;
-	left: 400px;
+	top: 0px;
+	left: 410px;
 }
 
 .enemy {
