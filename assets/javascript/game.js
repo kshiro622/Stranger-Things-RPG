@@ -121,6 +121,7 @@ $(document).ready(function(){
 	var playerAttack = '';
 	var defenderHealth = '';
 	var defenderAttack = '';
+	var defenderName = '';
 
 	function setAttack() {
 		for (var m = 0; m < characters.length; m++) {
@@ -128,6 +129,7 @@ $(document).ready(function(){
 				playerHealth = characters[m].health;
 				playerAttack = characters[m].attack;
 			} else if (characters[m].isDefender === true) {
+				defenderName = characters[m].name;
 				defenderHealth = characters[m].health;
 				defenderCounter = characters[m].counterAttack;
 			};
@@ -144,17 +146,24 @@ $(document).ready(function(){
 		};
 	};
 
-// attack button --> 
+// attack button
 	$('#attack').on('click', function() {
 		setAttack();
 		playerHealth = playerHealth - defenderCounter;
 		defenderHealth = defenderHealth - playerAttack;
-		playerAttack = playerAttack * 2;
 		displayHealth();
+		$('#player-attack-results').html('You attacked ' + defenderName + ' for ' + playerAttack + ' damage.');
+		$('#defender-attack-results').html(defenderName + ' attacked you for ' + defenderCounter + ' damage.');
+		playerAttack = playerAttack * 2;
 	});
+
+
+//restart button
+	// $('#restart').on('click', function() {
+
+	// }
+
 });
-
-
 // // restart button
 // 	$('#restart').on('click', function() {
 // 		$('#eleven').animate({top: '5px'});
