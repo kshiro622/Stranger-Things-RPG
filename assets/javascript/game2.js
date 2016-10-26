@@ -1,60 +1,46 @@
 $(document).ready(function(){
 
-// character data
-	var characters = [
-		{
-			name: 'Eleven',
-			image: 
-			health: 120,
-			attack: 8,
-			counterAttack: 15,
-			isCharacter: false,
-			isDefender: false
-		},
+	var eleven = {
+		health: 120,
+		attack: 8,
+		counterAttack: 15,
+		isCharacter: false,
+		isDefender: false
+	};
 
-		{
-			name: 'Chief Hopper',
-			image:
-			health: 100,
-			attack: 5,
-			counterAttack: 10,
-			isCharacter: false,
-			isDefender: false
-		},
+	var chiefHopper = {
+		health: 100,
+		attack: 5,
+		counterAttack: 10,
+		isCharacter: false,
+		isDefender: false
+	};
 
-		{
-			name: 'Monster',
-			image:
-			health: 180,
-			attack: 25,
-			counterAttack: 25,
-			isCharacter: false,
-			isDefender: false
-		},
+	var monster = {
+		health: 180,
+		attack: 25,
+		counterAttack: 25,
+		isCharacter: false,
+		isDefender: false
+	};
 
-		{
-			name: 'Dr. Brenner',
-			image:
-			health: 150,
-			attack: 16,
-			counterAttack: 20,
-			isCharacter: false,
-			isDefender: false
-		}
-	];
+	var drBrenner = {
+		health: 150,
+		attack: 16,
+		counterAttack: 20,
+		isCharacter: false,
+		isDefender: false
+	};
 
 	var characterIsChosen = false;
 	var defenderIsChosen = false;
 
-//initialize game
+//display health score of each player
 
-function initialize(){
-	//inner HTML print to DOM 
-	for (var i = 0; i<characters.length; i++) {
-
-	}
-	//on click functions
-}
+	$('.eleven-health').html(eleven.health);
+	$('.chief-hopper-health').html(chiefHopper.health);
+	$('.monster-health').html(monster.health);
+	$('.dr-brenner-health').html(drBrenner.health);
 
 // choose character, move others to enemies
 	if (characterIsChosen === false) {
