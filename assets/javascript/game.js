@@ -69,7 +69,7 @@ $(document).ready(function(){
 			left: '285px'
 		}
 	];
-	var charDivs = [];
+
 	var characterIsChosen = false;
 	var defenderIsChosen = false;
 	var enemyIndex = 0;
@@ -82,8 +82,7 @@ $(document).ready(function(){
 //function to render DOM with character divs
 	function initialize() {
 		for (var i = 0; i<characters.length; i++) {
-			charDivs.push("<div class='character' " + "id = \'" + characters[i].id + "\'>" + characters[i].name + characters[i].image + characters[i].health + "</div>");
-			$('#character-area').append(charDivs[i]);
+			$('#character-area').append("<div class='character' " + "id = \'" + characters[i].id + "\'>" + characters[i].name + characters[i].image + "<div id = \'" + characters[i].name + "-health\'>" + characters[i].health + "</div>" + "</div>");
 		}
 	};
 
@@ -96,7 +95,7 @@ $(document).ready(function(){
 		if ((characterIsChosen === false) && (defenderIsChosen === false)) {
 			characterIsChosen = true;
 			$(this).animate(yourCharPos);
-			for (var j = 0; j<characters.length; j++){
+			for (var j = 0; j < characters.length; j++){
 			    if (this.id === characters[j].id) {
 			        characters[j].isCharacter = true;
 			    } else {
@@ -110,54 +109,51 @@ $(document).ready(function(){
 			$(this).addClass('defender');
 			$('.defender').animate(defPos);
 			defenderIsChosen = true;
-		}
+			for (var k = 0; k<characters.length; k++){
+			    if (this.id === characters[k].id) {
+			        characters[k].isDefender = true;
+				};
+			};
+		};
+	});
+
+	var playerHealth = '';
+	var playerAttack = '';
+	var defenderHealth = '';
+	var defenderAttack = '';
+
+	function setAttack() {
+		for (var m = 0; m < characters.length; m++) {
+			if (characters[m].isCharacter === true) {
+				playerHealth = characters[m].health;
+				playerAttack = characters[m].attack;
+			} else if (characters[m].isDefender === true) {
+				defenderHealth = characters[m].health;
+				defenderCounter = characters[m].counterAttack;
+			};
+		};
+	};
+
+	function displayHealth() {
+		for (var n = 0; n < characters.length; n++) {
+			if (characters[n].isCharacter === true) {
+				$('#' + characters[n].name + '-health').html(playerHealth);
+			} else if (characters[n].isDefender === true) {
+				$('#' + characters[n].name + '-health').html(defenderHealth);
+			};
+		};
+	};
+
+// attack button --> 
+	$('#attack').on('click', function() {
+		setAttack();
+		playerHealth = playerHealth - defenderCounter;
+		defenderHealth = defenderHealth - playerAttack;
+		playerAttack = playerAttack * 2;
+		displayHealth();
 	});
 });
 
-	// } else if (opponentChosen === false) {
-		// move the opponent to the correct
-		// position
-		// ...
-		// set the flag to true so this won't
-		// happen again
-		// opponentChosen = true;
-		// do something else when the opponent is chosen
-	// } else {
-		// this means that both the character and the opponent both
-		// have been chosen, so if anything else should happen if
-		// they are clicked, then do it here
-	// }
-// };
-
-
-// // attack button --> 
-// 	$('#attack').on('click', function(character, defender) {
-// 		character.health = character.health - defender.counterAttack;
-// 		defender.health = defender.health - character.attack;
-// 		character.attack = character.attack * 2;//something to increase exponentially
-// 	});
-
-// 	if (eleven.isCharacter === true){ 
-// 		if (chiefHopper.isDefender === true) {
-// 			attack(eleven, chiefHopper);
-// 		} else if (monster.isDefender === true) {
-// 			attack(eleven, monster);
-// 		} else if (drBrenner.isDefender === true) {
-// 			attack(eleven, drBrenner);
-// 		}
-	
-// 		if (chiefHopper.isCharacter === true){
-// 			//...
-// 		}
-
-// 		if (monster.isCharacter === true){
-// 			//...
-// 		} 
-
-// 		if (drBrenner.isCharacter === true){
-// 			//...
-// 		}
-// 	};
 
 // // restart button
 // 	$('#restart').on('click', function() {
