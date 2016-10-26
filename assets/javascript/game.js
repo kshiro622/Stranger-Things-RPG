@@ -52,31 +52,74 @@ $(document).ready(function(){
 		top: '137px',
 		left: '25px'
 	};
+	var enemyPosArray = [
+		{
+			top: '285px',
+			left: '25px'
+		},
+
+		{
+			top: '285px',
+			left: '155px'
+		},
+
+		{
+			top: '285px',
+			left: '285px'
+		}
+	];
 	var charDivs = [];
 	var characterIsChosen = false;
 	var defenderIsChosen = false;
+	var enemyIndex = 0;
 
 //function to render DOM with character divs
-function initialize() {
-	for (var i = 0; i<characters.length; i++) {
-		charDivs.push("<div class='character' " + "id = \'" + characters[i].id + "\'>" + characters[i].name + characters[i].image + characters[i].health + "</div>");
-		$('#character-area').append(charDivs[i]);
-	}
-};
+	function initialize() {
+		for (var i = 0; i<characters.length; i++) {
+			charDivs.push("<div class='character' " + "id = \'" + characters[i].id + "\'>" + characters[i].name + characters[i].image + characters[i].health + "</div>");
+			$('#character-area').append(charDivs[i]);
+		}
+	};
 
 //renders DOM
-initialize();
+	initialize();
 
 //function to select character
 
-$('.character').on('click', function(){
-	$(this).animate(yourCharPos);
-
+	$('.character').on('click', function(){
+		if (characterIsChosen === false) {
+			characterIsChosen = true;
+			$(this).animate(yourCharPos);
+			for (var j = 0; j<characters.length; j++){
+			    if (this.id === characters[j].id) {
+			        characters[j].isCharacter = true;
+			        console.log(characters[j].isCharacter);
+			        console.log(characters[j].id);
+			    } else {
+			    	var enemyId = '#' + characters[j].id;
+			    	$(enemyId).animate(enemyPosArray[enemyIndex]);
+			    	$(enemyId).addClass('enemy');
+			    	enemyIndex++;
+			    };
+			};
+		};
+	});
 });
 
-// if (characterIsChosen === false){
-// 	selectChar();
-// }
+	// } else if (opponentChosen === false) {
+		// move the opponent to the correct
+		// position
+		// ...
+		// set the flag to true so this won't
+		// happen again
+		// opponentChosen = true;
+		// do something else when the opponent is chosen
+	// } else {
+		// this means that both the character and the opponent both
+		// have been chosen, so if anything else should happen if
+		// they are clicked, then do it here
+	// }
+// };
 
 // choose character, move others to enemies
 // 	if (characterIsChosen === false) {
@@ -184,5 +227,5 @@ $('.character').on('click', function(){
 // 		$('#monster').removeClass('enemy', 'defender');
 // 		$('#dr-brenner').removeClass('enemy', 'defender');
 // 	});
-});
+
 
