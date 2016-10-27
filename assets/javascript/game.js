@@ -79,10 +79,13 @@ $(document).ready(function(){
 			left: '25px'
 		};
 
+	var currentCharacter;
+	var currentEnemy;
+
 //function to render DOM with character divs
 	function initialize() {
 		for (var i = 0; i<characters.length; i++) {
-			$('#character-area').append("<div class='character' " + "id = \'" + characters[i].id + "\'>" + characters[i].name + characters[i].image + "<div id = \'" + characters[i].name + "-health\'>" + characters[i].health + "</div>" + "</div>");
+			$('#character-area').append("<div class='character' " + "id = \'" + characters[i].id + "\'>" + characters[i].name + characters[i].image + "<div id = \'" + characters[i].id + "-health\'>" + characters[i].health + "</div>" + "</div>");
 		}
 	};
 
@@ -98,6 +101,7 @@ $(document).ready(function(){
 			for (var j = 0; j < characters.length; j++){
 			    if (this.id === characters[j].id) {
 			        characters[j].isCharacter = true;
+			        currentCharacter = characters[j];
 			    } else {
 			    	var enemyId = '#' + characters[j].id;
 			    	$(enemyId).animate(enemyPosArray[enemyIndex]);
@@ -112,49 +116,51 @@ $(document).ready(function(){
 			for (var k = 0; k<characters.length; k++){
 			    if (this.id === characters[k].id) {
 			        characters[k].isDefender = true;
+			        currentEnemy = characters[k];
 				};
 			};
 		};
 	});
 
-	var playerHealth = '';
-	var playerAttack = '';
-	var defenderHealth = '';
-	var defenderAttack = '';
-	var defenderName = '';
+	// var playerHealth = '';
+	// var playerAttack = '';
+	// var defenderHealth = '';
+	// var defenderAttack = '';
+	// var defenderName = '';
 
-	function setAttack() {
-		for (var m = 0; m < characters.length; m++) {
-			if (characters[m].isCharacter === true) {
-				playerHealth = characters[m].health;
-				playerAttack = characters[m].attack;
-			} else if (characters[m].isDefender === true) {
-				defenderName = characters[m].name;
-				defenderHealth = characters[m].health;
-				defenderCounter = characters[m].counterAttack;
-			};
-		};
-	};
+	// function setAttack() {
+	// 	for (var m = 0; m < characters.length; m++) {
+	// 		if (characters[m].isCharacter === true) {
+	// 			playerHealth = characters[m].health;
+	// 			playerAttack = characters[m].attack;
+	// 		} else if (characters[m].isDefender === true) {
+	// 			defenderName = characters[m].name;
+	// 			defenderHealth = characters[m].health;
+	// 			defenderCounter = characters[m].counterAttack;
+	// 		};
+	// 	};
+	// };
 
+//displays health of character and enemy
 	function displayHealth() {
-		for (var n = 0; n < characters.length; n++) {
-			if (characters[n].isCharacter === true) {
-				$('#' + characters[n].name + '-health').html(playerHealth);
-			} else if (characters[n].isDefender === true) {
-				$('#' + characters[n].name + '-health').html(defenderHealth);
-			};
-		};
+		$('#' + currentCharacter.id + '-health').html(currentCharacter.health);
+		$('#' + currentEnemy.id + '-health').html(currentEnemy.health);
 	};
 
 // attack button
 	$('#attack').on('click', function() {
-		setAttack();
-		playerHealth = playerHealth - defenderCounter;
-		defenderHealth = defenderHealth - playerAttack;
-		displayHealth();
-		$('#player-attack-results').html('You attacked ' + defenderName + ' for ' + playerAttack + ' damage.');
-		$('#defender-attack-results').html(defenderName + ' attacked you for ' + defenderCounter + ' damage.');
-		playerAttack = playerAttack * 2;
+		if ((currentCharacter.health >= 0) && (currentEnemy.health >= 0)){
+			currentCharacter.health = currentCharacter.health - currentEnemy.counterAttack;
+			currentEnemy.health = currentEnemy.health - currentCharacter.attack;
+			displayHealth();
+			$('#player-attack-results').html('You attacked ' + currentEnemy.name + ' for ' + currentCharacter.attack + ' damage.');
+			$('#defender-attack-results').html(currentEnemy.name + ' attacked you for ' + currentEnemy.counterAttack + ' damage.');
+			currentCharacter.attack = currentCharacter.attack * 2;
+		} else if (currentEnemy.health <= 0){
+			$('#player-attack-results').html('You Win!');
+		} else if (currentCharacter.health <= 0){
+			$('#player-attack-results').html('You have been defeated... GAME OVER!');
+		};
 	});
 
 
