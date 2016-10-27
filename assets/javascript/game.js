@@ -10,6 +10,7 @@ $(document).ready(function(){
 			attack: 8,
 			counterAttack: 15,
 			isCharacter: false,
+			isEnemy: false,
 			isDefender: false
 		},
 
@@ -21,6 +22,7 @@ $(document).ready(function(){
 			attack: 5,
 			counterAttack: 10,
 			isCharacter: false,
+			isEnemy: false,
 			isDefender: false
 		},
 
@@ -32,6 +34,7 @@ $(document).ready(function(){
 			attack: 25,
 			counterAttack: 25,
 			isCharacter: false,
+			isEnemy: false,
 			isDefender: false
 		},
 
@@ -43,11 +46,33 @@ $(document).ready(function(){
 			attack: 16,
 			counterAttack: 20,
 			isCharacter: false,
+			isEnemy: false,
 			isDefender: false
 		}
 	];
 
-	var charWidth = 120;
+	var originPosition = [
+		{
+			top: '0px',
+			left: '20px'
+		},
+
+		{
+			top: '0px',
+			left: '150px'
+		},
+
+		{
+			top: '0px',
+			left: '280px'
+		},
+
+		{
+			top: '0px',
+			left: '410px'
+		}
+	];
+
 	var yourCharPos = 
 		{
 			top: '137px',
@@ -86,6 +111,7 @@ $(document).ready(function(){
 	function initialize() {
 		for (var i = 0; i<characters.length; i++) {
 			$('#character-area').append("<div class='character' " + "id = \'" + characters[i].id + "\'>" + characters[i].name + characters[i].image + "<div id = \'" + characters[i].id + "-health\'>" + characters[i].health + "</div>" + "</div>");
+			$('#' + characters[i].id).animate(originPosition[i]);
 		}
 	};
 
@@ -106,6 +132,7 @@ $(document).ready(function(){
 			    	var enemyId = '#' + characters[j].id;
 			    	$(enemyId).animate(enemyPosArray[enemyIndex]);
 			    	$(enemyId).addClass('enemy');
+			    	characters[j].isEnemy = true;
 			    	enemyIndex++;
 			    };
 			};
@@ -113,33 +140,22 @@ $(document).ready(function(){
 			$(this).addClass('defender');
 			$('.defender').animate(defPos);
 			defenderIsChosen = true;
+			enemyIndex = 0;
 			for (var k = 0; k<characters.length; k++){
 			    if (this.id === characters[k].id) {
 			        characters[k].isDefender = true;
+			        characters[k].isEnemy = false;
 			        currentEnemy = characters[k];
 				};
 			};
+			// for (var l = 0; l<characters.length; l++){
+			// 	if (characters[l].isEnemy === true){
+			// 		$('#' + characters[k].id).animate(defPos[enemyIndex]);
+			// 		enemyIndex++;
+			// 	}
+			// }
 		};
 	});
-
-	// var playerHealth = '';
-	// var playerAttack = '';
-	// var defenderHealth = '';
-	// var defenderAttack = '';
-	// var defenderName = '';
-
-	// function setAttack() {
-	// 	for (var m = 0; m < characters.length; m++) {
-	// 		if (characters[m].isCharacter === true) {
-	// 			playerHealth = characters[m].health;
-	// 			playerAttack = characters[m].attack;
-	// 		} else if (characters[m].isDefender === true) {
-	// 			defenderName = characters[m].name;
-	// 			defenderHealth = characters[m].health;
-	// 			defenderCounter = characters[m].counterAttack;
-	// 		};
-	// 	};
-	// };
 
 //displays health of character and enemy
 	function displayHealth() {
@@ -155,31 +171,32 @@ $(document).ready(function(){
 			displayHealth();
 			$('#player-attack-results').html('You attacked ' + currentEnemy.name + ' for ' + currentCharacter.attack + ' damage.');
 			$('#defender-attack-results').html(currentEnemy.name + ' attacked you for ' + currentEnemy.counterAttack + ' damage.');
-			currentCharacter.attack = currentCharacter.attack * 2;
-		} else if (currentEnemy.health <= 0){
-			$('#player-attack-results').html('You Win!');
-		} else if (currentCharacter.health <= 0){
-			$('#player-attack-results').html('You have been defeated... GAME OVER!');
+			currentCharacter.attack = currentCharacter.attack * 1.5;
+			if (currentEnemy.health <= 0){
+				$('#player-attack-results').html('You have defeated ' + currentEnemy.name + ' .');
+				$('#defender-attack-results').html('You can choose to fight another enemy.')
+				$('#' + currentEnemy.id).hide();
+				defenderIsChosen = false;
+			} else if (currentCharacter.health <= 0){
+				$('#player-attack-results').html('You have been defeated... GAME OVER!');
+				$('#defender-attack-results').html('');
+			};
 		};
 	});
 
 
-//restart button
-	// $('#restart').on('click', function() {
-
-	// }
-
+// restart button
+	$('#restart').on('click', function() {
+		characterIsChosen = false;
+		defenderIsChosen = false;
+		enemyIndex = 0;
+		for (var q = 0; q<characters.length; q++){
+			$('#' + characters[q].id).removeClass('enemy defender');
+			$('#' + characters[q].id).show();
+			$('#' + characters[q].id).animate(originPosition[q]);
+		};
+	});
 });
-// // restart button
-// 	$('#restart').on('click', function() {
-// 		$('#eleven').animate({top: '5px'});
-// 		$('#chief-hopper').animate({top:'5px', left:'140px'});
-// 		$('#monster').animate({top:'5px', left:'270px'});
-// 		$('#dr-brenner').animate({top:'5px', left:'400px'});
-// 		$('#eleven').removeClass('enemy', 'defender');
-// 		$('#chief-hopper').removeClass('enemy', 'defender');
-// 		$('#monster').removeClass('enemy', 'defender');
-// 		$('#dr-brenner').removeClass('enemy', 'defender');
-// 	});
+
 
 

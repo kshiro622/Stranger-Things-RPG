@@ -9,9 +9,9 @@ body{
 	background-size: 100%;
 }
 
-/*.header {
-	margin-bottom: 5px;
-}*/
+.container {
+	width: 100%;
+}
 
 h1 {
 	color: #ee2e24;
@@ -71,26 +71,6 @@ h1 {
 	height: 72px;
 }
 
-#eleven {
-	top: 0px;
-	left: 20px;
-}
-
-#chief-hopper {
-	top: 0px;
-	left: 150px;
-}
-
-#monster {
-	top: 0px;
-	left: 280px;
-}
-
-#dr-brenner {
-	top: 0px;
-	left: 410px;
-}
-
 .enemy {
 	background-color: gray;
 	border: 2px solid #ee2e24;
@@ -100,4 +80,15 @@ h1 {
 	background-color: #ee2e24;
 	border: 2px solid white;
 	color: white;
+}
+
+.results {
+	color: #ee2e24;
+	font-size: 16px;
+	font-family: 'Schoolbell', cursive;
+	margin-left: 15px;
+}
+
+#player-attack-results {
+	margin-top: 95px;
 }

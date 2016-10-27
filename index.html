@@ -12,7 +12,7 @@
 <body>
 
 <!-- Title Row -->
-<!-- <div class='container'> -->
+<div class='container'>
 	<div class="row header">
 		<div class="col-md-8" id="character-area"></div>
 		<div class="col-md-3">
@@ -50,20 +50,20 @@
 		</div>
 	</div>
 
-<!-- Defender Section -->
+<!-- Defender and Attack Results Section-->
 	<div class="row">
-		<div class="col-md-12 game">
+		<div class="col-md-1 game">
 			Defender
 		</div>
-	</div>
-
-<!-- Attack Results Section -->
-	<div class="row">
-		<div class="col-md-12 button" id="player-attack-results"></div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-12 button" id="defender-attack-results"></div>
+		<div class="col-md-3">
+			<div class="row">
+				<div class="col-md-12 results" id="player-attack-results"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 results" id="defender-attack-results"></div>
+			</div>
+		</div>
+		<div class="col-md-8"></div>
 	</div>
 
 <!-- Restart Button Section -->
@@ -72,32 +72,7 @@
 			<button id="restart">Restart</button>
 		</div>
 	</div>
-<!-- </div> -->
-
-<!-- Characters -->
-<!-- 	<div class="character" id="eleven">
-		Eleven
-		<img src="assets/images/eleven.jpeg" class="character-image" alt="Eleven">
-		<div class="eleven-health"></div>
-	</div>
-
-	<div class="character" id="chief-hopper">
-		Chief Hopper
-		<img src="assets/images/jimhopper.jpeg" class="character-image" alt="Chief Hopper">
-		<div class="chief-hopper-health"></div>
-	</div>
-
-	<div class="character" id="monster">
-		Monster
-		<img src="assets/images/monster.jpeg" class="character-image" alt="Monster">
-		<div class="monster-health"></div>
-	</div>
-
-	<div class="character" id="dr-brenner">
-		Dr. Brenner
-		<img src="assets/images/drbrenner.jpeg" class="character-image" alt="Dr. Brenner">
-		<div class="dr-brenner-health"></div>
-	</div> -->
+</div>
 
 <script src="assets/javascript/game.js"></script>
 </body>
