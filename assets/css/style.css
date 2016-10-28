@@ -58,6 +58,8 @@ h1 {
 
 .character {
 	font-size: 13px;
+	font-weight: bold;
+	font-family: 'Schoolbell', cursive;
 	width: 120px;
 	height: 110px;
 	background-color: white;
