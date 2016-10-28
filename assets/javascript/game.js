@@ -8,8 +8,10 @@ $(document).ready(function(){
 			image: "<img src='assets/images/eleven.jpeg' class='character-image' alt='Eleven'>",
 			initialHealth: 120,
 			health: 120,
-			attack: 8,
-			counterAttack: 15,
+			initialAttack: 11,
+			attack: 11,
+			attackIncrease: 11,
+			counterAttack: 7,
 			isCharacter: false,
 			isEnemy: false,
 			isDefender: false
@@ -19,10 +21,12 @@ $(document).ready(function(){
 			name: 'Chief Hopper',
 			id: 'chief-hopper',
 			image: "<img src='assets/images/jimhopper.jpeg' class='character-image' alt='Chief Hopper'>",
-			initialHealth: 100,
-			health: 100,
-			attack: 5,
-			counterAttack: 10,
+			initialHealth: 110,
+			health: 110,
+			initialAttack: 10,
+			attack: 10,
+			attackIncrease: 10,
+			counterAttack: 5,
 			isCharacter: false,
 			isEnemy: false,
 			isDefender: false
@@ -32,10 +36,12 @@ $(document).ready(function(){
 			name: 'Monster',
 			id: 'monster',
 			image: "<img src='assets/images/monster.jpeg' class='character-image' alt='Monster'>",
-			initialHealth: 180,
-			health: 180,
-			attack: 25,
-			counterAttack: 25,
+			initialHealth: 170,
+			health: 170,
+			initialAttack: 13,
+			attack: 13,
+			attackIncrease: 13,
+			counterAttack: 20,
 			isCharacter: false,
 			isEnemy: false,
 			isDefender: false
@@ -47,14 +53,17 @@ $(document).ready(function(){
 			image: "<img src='assets/images/drbrenner.jpeg' class='character-image' alt='Dr. Brenner'>",
 			initialHealth: 150,
 			health: 150,
-			attack: 16,
-			counterAttack: 20,
+			initialAttack: 12,
+			attack: 12,
+			attackIncrease: 12,
+			counterAttack: 15,
 			isCharacter: false,
 			isEnemy: false,
 			isDefender: false
 		}
 	];
 
+//character original positions
 	var originPosition = [
 		{
 			top: '0px',
@@ -77,11 +86,13 @@ $(document).ready(function(){
 		}
 	];
 
+//your character, enemy, and defender positions
 	var yourCharPos = 
 		{
 			top: '137px',
 			left: '25px'
 		};
+
 	var enemyPosArray = [
 		{
 			top: '285px',
@@ -99,19 +110,22 @@ $(document).ready(function(){
 		}
 	];
 
-	var characterIsChosen = false;
-	var defenderIsChosen = false;
-	var enemyIndex = 0;
 	var defPos = 
 		{
 			top: '500px',
 			left: '25px'
 		};
 
+//global variables
+	var characterIsChosen = false;
+	var defenderIsChosen = false;
+	var enemyIndex = 0;
 	var currentCharacter;
 	var currentEnemy;
+	var enemiesLeft = 2;
+	var defenderIsThere = false;
 
-//function to render DOM with character divs
+//function to render DOM
 	function initialize() {
 		for (var i = 0; i<characters.length; i++) {
 			$('#character-area').append("<div class='character' " + "id = \'" + characters[i].id + "\'>" + characters[i].name + characters[i].image + "<div id = \'" + characters[i].id + "-health\'>" + characters[i].health + "</div>" + "</div>");
@@ -122,8 +136,7 @@ $(document).ready(function(){
 //renders DOM
 	initialize();
 
-//function to select character
-
+//selects character, then defender
 	$('.character').on('click', function(){
 		if ((characterIsChosen === false) && (defenderIsChosen === false)) {
 			characterIsChosen = true;
@@ -144,22 +157,29 @@ $(document).ready(function(){
 			$(this).addClass('defender');
 			$('.defender').animate(defPos);
 			defenderIsChosen = true;
+			defenderIsThere = true;
 			enemyIndex = 0;
 			for (var k = 0; k<characters.length; k++){
 			    if (this.id === characters[k].id) {
 			        characters[k].isDefender = true;
 			        characters[k].isEnemy = false;
 			        currentEnemy = characters[k];
-				};
+				}
 			};
-			// for (var l = 0; l<characters.length; l++){
-			// 	if (characters[l].isEnemy === true){
-			// 		$('#' + characters[k].id).animate(defPos[enemyIndex]);
-			// 		enemyIndex++;
-			// 	}
-			// }
+
+			moveEnemies();
 		};
 	});
+
+//shifts enemies left
+	function moveEnemies (){
+		for (var l = 0; l<characters.length; l++){
+			if (characters[l].isEnemy === true){
+				$('#' + characters[l].id).animate(enemyPosArray[enemyIndex]);
+				enemyIndex++;
+			};
+		};
+	};
 
 //displays health of character and enemy
 	function displayHealth() {
@@ -169,22 +189,34 @@ $(document).ready(function(){
 
 // attack button
 	$('#attack').on('click', function() {
-		if ((currentCharacter.health >= 0) && (currentEnemy.health >= 0)){
-			currentCharacter.health = currentCharacter.health - currentEnemy.counterAttack;
-			currentEnemy.health = currentEnemy.health - currentCharacter.attack;
-			displayHealth();
-			$('#player-attack-results').html('You attacked ' + currentEnemy.name + ' for ' + currentCharacter.attack + ' damage.');
-			$('#defender-attack-results').html(currentEnemy.name + ' attacked you for ' + currentEnemy.counterAttack + ' damage.');
-			currentCharacter.attack = currentCharacter.attack * 2;
-			if (currentEnemy.health <= 0){
-				$('#player-attack-results').html('You have defeated ' + currentEnemy.name + ' .');
-				$('#defender-attack-results').html('You can choose to fight another enemy.')
-				$('#' + currentEnemy.id).hide();
-				defenderIsChosen = false;
-			} else if (currentCharacter.health <= 0){
-				$('#player-attack-results').html('You have been defeated... GAME OVER!');
-				$('#defender-attack-results').html('');
+		if (defenderIsThere === true) {
+			if ((currentCharacter.health >= 0) && (currentEnemy.health >= 0)){
+				currentCharacter.health = currentCharacter.health - currentEnemy.counterAttack;
+				currentEnemy.health = currentEnemy.health - currentCharacter.attack;
+				displayHealth();
+				$('#player-attack-results').html('You attacked ' + currentEnemy.name + ' for ' + currentCharacter.attack + ' damage.');
+				$('#defender-attack-results').html(currentEnemy.name + ' attacked you for ' + currentEnemy.counterAttack + ' damage.');
+				currentCharacter.attack = currentCharacter.attack + currentCharacter.attackIncrease;
+				if (currentEnemy.health <= 0){
+					if (enemiesLeft > 0) {
+						$('#player-attack-results').html('You have defeated ' + currentEnemy.name + ' .');
+						$('#defender-attack-results').html('You can choose to fight another enemy.')
+						$('#' + currentEnemy.id).hide();
+						defenderIsChosen = false;
+						defenderIsThere = false;
+						enemiesLeft--;
+					}else {
+						$('#player-attack-results').html('You have defeated ' + currentEnemy.name + ' .');
+						$('#defender-attack-results').html('YOU WIN!! Game Over!')
+					};
+				} else if (currentCharacter.health <= 0){
+					$('#player-attack-results').html('You have been defeated... GAME OVER!');
+					$('#defender-attack-results').html('');
+				};
 			};
+		} else if (defenderIsThere === false) {
+			$('#player-attack-results').html('No enemy here.');
+			$('#defender-attack-results').html('');
 		};
 	});
 
@@ -194,6 +226,8 @@ $(document).ready(function(){
 		characterIsChosen = false;
 		defenderIsChosen = false;
 		enemyIndex = 0;
+		defenderIsThere = false;
+		enemiesLeft = 2;
 		for (var q = 0; q<characters.length; q++){
 			$('#' + characters[q].id).removeClass('enemy defender');
 			$('#' + characters[q].id).show();
@@ -201,6 +235,7 @@ $(document).ready(function(){
 			$('#player-attack-results').html(' ');
 			$('#defender-attack-results').html(' ');
 			characters[q].health = characters[q].initialHealth;
+			characters[q].attack = characters[q].initialAttack;
 			$('#' + characters[q].id + '-health').html(characters[q].health);
 		};
 	});
