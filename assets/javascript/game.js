@@ -6,6 +6,7 @@ $(document).ready(function(){
 			name: 'Eleven',
 			id: 'eleven',
 			image: "<img src='assets/images/eleven.jpeg' class='character-image' alt='Eleven'>",
+			initialHealth: 120,
 			health: 120,
 			attack: 8,
 			counterAttack: 15,
@@ -18,6 +19,7 @@ $(document).ready(function(){
 			name: 'Chief Hopper',
 			id: 'chief-hopper',
 			image: "<img src='assets/images/jimhopper.jpeg' class='character-image' alt='Chief Hopper'>",
+			initialHealth: 100,
 			health: 100,
 			attack: 5,
 			counterAttack: 10,
@@ -30,6 +32,7 @@ $(document).ready(function(){
 			name: 'Monster',
 			id: 'monster',
 			image: "<img src='assets/images/monster.jpeg' class='character-image' alt='Monster'>",
+			initialHealth: 180,
 			health: 180,
 			attack: 25,
 			counterAttack: 25,
@@ -42,6 +45,7 @@ $(document).ready(function(){
 			name: 'Dr. Brenner',
 			id: 'dr-brenner',
 			image: "<img src='assets/images/drbrenner.jpeg' class='character-image' alt='Dr. Brenner'>",
+			initialHealth: 150,
 			health: 150,
 			attack: 16,
 			counterAttack: 20,
@@ -171,7 +175,7 @@ $(document).ready(function(){
 			displayHealth();
 			$('#player-attack-results').html('You attacked ' + currentEnemy.name + ' for ' + currentCharacter.attack + ' damage.');
 			$('#defender-attack-results').html(currentEnemy.name + ' attacked you for ' + currentEnemy.counterAttack + ' damage.');
-			currentCharacter.attack = currentCharacter.attack * 1.5;
+			currentCharacter.attack = currentCharacter.attack * 2;
 			if (currentEnemy.health <= 0){
 				$('#player-attack-results').html('You have defeated ' + currentEnemy.name + ' .');
 				$('#defender-attack-results').html('You can choose to fight another enemy.')
@@ -194,6 +198,10 @@ $(document).ready(function(){
 			$('#' + characters[q].id).removeClass('enemy defender');
 			$('#' + characters[q].id).show();
 			$('#' + characters[q].id).animate(originPosition[q]);
+			$('#player-attack-results').html(' ');
+			$('#defender-attack-results').html(' ');
+			characters[q].health = characters[q].initialHealth;
+			$('#' + characters[q].id + '-health').html(characters[q].health);
 		};
 	});
 });
