@@ -25,7 +25,6 @@ $(document).ready(function(){
 			health: 110,
 			initialAttack: 10,
 			attack: 10,
-			attackIncrease: 10,
 			counterAttack: 5,
 			isCharacter: false,
 			isEnemy: false,
@@ -40,7 +39,6 @@ $(document).ready(function(){
 			health: 170,
 			initialAttack: 13,
 			attack: 13,
-			attackIncrease: 13,
 			counterAttack: 20,
 			isCharacter: false,
 			isEnemy: false,
@@ -55,7 +53,6 @@ $(document).ready(function(){
 			health: 150,
 			initialAttack: 12,
 			attack: 12,
-			attackIncrease: 12,
 			counterAttack: 15,
 			isCharacter: false,
 			isEnemy: false,
@@ -196,7 +193,7 @@ $(document).ready(function(){
 				displayHealth();
 				$('#player-attack-results').html('You attacked ' + currentEnemy.name + ' for ' + currentCharacter.attack + ' damage.');
 				$('#defender-attack-results').html(currentEnemy.name + ' attacked you for ' + currentEnemy.counterAttack + ' damage.');
-				currentCharacter.attack = currentCharacter.attack + currentCharacter.attackIncrease;
+				currentCharacter.attack = currentCharacter.attack + currentCharacter.initialAttack;
 				if (currentEnemy.health <= 0){
 					if (enemiesLeft > 0) {
 						$('#player-attack-results').html('You have defeated ' + currentEnemy.name + ' .');
