@@ -151,23 +151,20 @@ $(document).ready(function(){
 			    };
 			};
 		} else if ((characterIsChosen === true) && (defenderIsChosen === false)){
-			//the for loop and if statement below were to stop character from moving to defener when clicked again, but it didn't work.
-			// for (var x = 0; x<characters.length; x++) {
-			// 	if (characters[x].isCharacter === false) {
-					$(this).addClass('defender');
-					$('.defender').animate(defPos);
-					defenderIsChosen = true;
-					defenderIsThere = true;
-					enemyIndex = 0;
-					for (var k = 0; k<characters.length; k++){
-					    if (this.id === characters[k].id) {
-					        characters[k].isDefender = true;
-					        characters[k].isEnemy = false;
-					        currentEnemy = characters[k];
-						};
+			enemyIndex = 0;
+			if (this.id != currentCharacter.id) {
+				$(this).addClass('defender');
+				$('.defender').animate(defPos);
+				defenderIsChosen = true;
+				defenderIsThere = true;
+				for (var k = 0; k<characters.length; k++){
+				    if (this.id === characters[k].id) {
+				        characters[k].isDefender = true;
+				        characters[k].isEnemy = false;
+				        currentEnemy = characters[k];
 					};
-			// 	};
-			// };
+				};
+			};
 
 			moveEnemies();
 		};
@@ -207,6 +204,7 @@ $(document).ready(function(){
 						defenderIsChosen = false;
 						defenderIsThere = false;
 						enemiesLeft--;
+						enemyIndex = 0;
 					}else {
 						$('#player-attack-results').html('You have defeated ' + currentEnemy.name + ' .');
 						$('#defender-attack-results').html('YOU WIN!! Game Over!')
