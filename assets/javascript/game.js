@@ -151,6 +151,7 @@ $(document).ready(function(){
 			    };
 			};
 		} else if ((characterIsChosen === true) && (defenderIsChosen === false)){
+			//the for loop and if statement below were to stop character from moving to defener when clicked again, but it didn't work.
 			// for (var x = 0; x<characters.length; x++) {
 			// 	if (characters[x].isCharacter === false) {
 					$(this).addClass('defender');
