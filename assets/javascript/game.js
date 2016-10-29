@@ -151,18 +151,22 @@ $(document).ready(function(){
 			    };
 			};
 		} else if ((characterIsChosen === true) && (defenderIsChosen === false)){
-			$(this).addClass('defender');
-			$('.defender').animate(defPos);
-			defenderIsChosen = true;
-			defenderIsThere = true;
-			enemyIndex = 0;
-			for (var k = 0; k<characters.length; k++){
-			    if (this.id === characters[k].id) {
-			        characters[k].isDefender = true;
-			        characters[k].isEnemy = false;
-			        currentEnemy = characters[k];
-				}
-			};
+			// for (var x = 0; x<characters.length; x++) {
+			// 	if (characters[x].isCharacter === false) {
+					$(this).addClass('defender');
+					$('.defender').animate(defPos);
+					defenderIsChosen = true;
+					defenderIsThere = true;
+					enemyIndex = 0;
+					for (var k = 0; k<characters.length; k++){
+					    if (this.id === characters[k].id) {
+					        characters[k].isDefender = true;
+					        characters[k].isEnemy = false;
+					        currentEnemy = characters[k];
+						};
+					};
+			// 	};
+			// };
 
 			moveEnemies();
 		};
@@ -210,6 +214,9 @@ $(document).ready(function(){
 					$('#player-attack-results').html('You have been defeated... GAME OVER!');
 					$('#defender-attack-results').html('');
 				};
+			} else if (currentCharacter.health <= 0) {
+				$('#player-attack-results').html('You have been defeated... GAME OVER!');
+				$('#defender-attack-results').html('');
 			};
 		} else if (defenderIsThere === false) {
 			$('#player-attack-results').html('No enemy here.');
@@ -234,6 +241,9 @@ $(document).ready(function(){
 			characters[q].health = characters[q].initialHealth;
 			characters[q].attack = characters[q].initialAttack;
 			$('#' + characters[q].id + '-health').html(characters[q].health);
+			characters[q].isEnemy = false;
+			characters[q].isCharacter = false;
+			characters[q].isDefender = false;
 		};
 	});
 });
